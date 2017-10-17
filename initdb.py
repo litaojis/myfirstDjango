@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 import random
 from myfirstDjango.wsgi import *
-from blog.models import Author,Article,Tag
+from blog.models import *
 
 author_name_list = ['Ltao','Ajoker','Lushan','YTXX']
 article_title_list = ['Django教程','Git入门','Java从入门到放弃','Vue&Python快速构建web应用']
