@@ -25,7 +25,7 @@ SECRET_KEY = '2&c1ql2a7!=q1p93m*_zsg*hv%vd+b5b9wbt^oq*573y4wodmo'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
-    'users',
 ]
 AUTH_USER_MODEL = 'users.User'
 

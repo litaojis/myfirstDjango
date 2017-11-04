@@ -17,14 +17,14 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import urls as auth_urls
-from blog import views as blog_views
+from blog import views as blog_views ,handle 
 
 
 urlpatterns = [
     url(r'^account/',include(auth_urls,namespace='users.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^accounts/', include('users.urls')),
     url(r'^ajax_list/$', blog_views.json_list, name='ajax-list'),
     url(r'^ajax_dict/$', blog_views.json_dict, name='ajax-dict'),
-    url(r'^mine/$',blog_views.MyView.as_view(),name='my-view')
+    url(r'^mine/$',blog_views.MyView.as_view(),name='my-view'),
+    url(R'^blog/weixin/handle/$',handle.handle,name = 'handle')
 ]
