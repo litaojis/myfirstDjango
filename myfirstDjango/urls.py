@@ -26,5 +26,5 @@ urlpatterns = [
     url(r'^ajax_list/$', blog_views.json_list, name='ajax-list'),
     url(r'^ajax_dict/$', blog_views.json_dict, name='ajax-dict'),
     url(r'^mine/$',blog_views.MyView.as_view(),name='my-view'),
-    url(R'^blog/weixin/handle/$',handle.handle,name = 'handle')
+    url(R'^blog/weixin/handle$',handle.handle,name = 'handle')
 ]

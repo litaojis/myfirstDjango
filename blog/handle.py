@@ -1,16 +1,18 @@
 #coding=utf-8
 import hashlib
 import json
-from lxml import etree
+# from lxml import etree
 from django.utils.encoding import smart_str
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse,HttpRequest
 # from auto_reply.views import auto_reply_main # 修改这里
 
 WEIXIN_TOKEN = 'qrjnA2TwLC9smalN1ceS'
+AppId = 'wxcf61a8651b530b1f'
+AppSecret = '4182b42f21d069d0d9d3ee93363b1b1d'
 
 
-@csrf_exempt
+#@csrf_exempt
 def handle(request):
     if request.method == "GET" :
         signature = request.GET.get('signature')
@@ -18,13 +20,9 @@ def handle(request):
         nonce = request.GET.get("nonce")
         echostr = request.GET.get("echostr")
         token = WEIXIN_TOKEN #请按照公众平台官网\基本配置中信息填写
-
-        hlist = [signature,nonce,token]
-        hlist.sort()
-        tmp_str = "%s%s%s" % tuple(hlist)
-        tmp_str = hashlib.sha1(tmp_str).hexdigest()
-        print('signatue:%s,timestamp:%s,notice:%s,echostr:%s',%(signatue,timestamp,notice,echostr))
-        if (tmp_str == signature):
+        print('signatuee:%s,timestamp:%s,notice:%s,echostr:%s'%(signature,timestamp,token,echostr))
+        flag = weixinCheck(signature,timestamp,nonce,token)
+        if (flag):
             return HttpResponse(echostr)
         else:
             return HttpResponse("weixin  index")
@@ -33,3 +31,18 @@ def handle(request):
         request_xml = etree.fromstring(xml_str)
         # response_xml = auto_reply_main(request_xml)
         return HttpResponse(response_xml)
+
+def weixinCheck(signature,timestamp,nonce,token):
+    
+    hlist = [nonce,timestamp,token]
+    hlist.sort()
+    tmp_str = "%s%s%s" % tuple(hlist)
+    tmp_str = hashlib.sha1(tmp_str.encode(encoding='UTF-8')).hexdigest()
+    
+    print(tmp_str== signature)
+    print(tmp_str)
+    if (tmp_str == signature):
+        return True
+    else:
+        return False
+    
