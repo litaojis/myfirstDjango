@@ -23,6 +23,7 @@ def handle(request):
         hlist.sort()
         tmp_str = "%s%s%s" % tuple(hlist)
         tmp_str = hashlib.sha1(tmp_str).hexdigest()
+        print('signatue:%s,timestamp:%s,notice:%s,echostr:%s',%(signatue,timestamp,notice,echostr))
         if (tmp_str == signature):
             return HttpResponse(echostr)
         else:
