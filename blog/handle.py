@@ -5,14 +5,14 @@ import json
 from django.utils.encoding import smart_str
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse,HttpRequest
-# from auto_reply.views import auto_reply_main # 修改这里
+import blog.weixin_autoreply as wxreply
 
 WEIXIN_TOKEN = 'qrjnA2TwLC9smalN1ceS'
 AppId = 'wxcf61a8651b530b1f'
 AppSecret = '4182b42f21d069d0d9d3ee93363b1b1d'
 
 
-#@csrf_exempt
+@csrf_exempt
 def handle(request):
     if request.method == "GET" :
         signature = request.GET.get('signature')
@@ -25,12 +25,10 @@ def handle(request):
         if (flag):
             return HttpResponse(echostr)
         else:
-            return HttpResponse("weixin  index")
+            return HttpResponse('sorry')
     else:
-        xml_str = smart_str(request.body)
-        request_xml = etree.fromstring(xml_str)
-        # response_xml = auto_reply_main(request_xml)
-        return HttpResponse(response_xml)
+        handleResp = wxreply.handle(request)
+        return HttpResponse(handleResp)
 
 def weixinCheck(signature,timestamp,nonce,token):
     

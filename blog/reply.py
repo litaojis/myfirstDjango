@@ -15,10 +15,10 @@ class TextMsg(Msg):
         self.__dict['ToUserName'] = toUserName
         self.__dict['FromUserName'] = fromUserName
         self.__dict['CreateTime'] = int(time.time())
-        self.__dict['content'] = content
+        self.__dict['Content'] = content
 
     def send(self):
-        xmlForm = '''
+        XmlForm = '''
         <xml>
         <ToUserName><![CDATA[{ToUserName}]]></ToUserName>
         <FromUserName><![CDATA[{FromUserName}]]></FromUserName>
