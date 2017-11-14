@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import time
+import blog.wxUtil as wxUtil
+import blog.common as common
 
 
 class Msg(object):
@@ -18,6 +20,12 @@ class TextMsg(Msg):
         self.__dict['Content'] = content
 
     def send(self):
+        if self.__dict['Content'] == 'access_token':
+            Wxutil = wxUtil.WxUtil()
+            access_token = Wxutil.getAccess_Token(common.APPID,common.APPSECRET)
+            if access_token != None:
+                self.__dict['Content'] = access_token
+
         XmlForm = '''
         <xml>
         <ToUserName><![CDATA[{ToUserName}]]></ToUserName>
