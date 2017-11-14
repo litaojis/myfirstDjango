@@ -21,8 +21,9 @@ class WxUtil(object):
         # ssl._create_unverified_context()
         response = request.urlopen(url)
         print(response.status)
-        print(response.content)
+        print(response.msg)
         if response.status == 200:
-            return response.content
+            return response.read()
+        
         return None
     
