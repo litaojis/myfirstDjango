@@ -15,4 +15,11 @@ print(npSum())
 
 # Create your tests here.
 
+def testRedis():
+    from django_redis import get_redis_connection
+    get_redis_connection('default').flushall()
+    print('No Problem')
 
+
+if __name__ == 'testRedis':
+    testRedis()
